@@ -38,51 +38,127 @@
   </section>
 
   <section class="block">
+
+    <div class="bean-pouch-bar">
+      <div class="bean-pouch-heading">
+        <span class="bean-pouch-icon">🫘</span>
+        <div>
+          <h2>The Bean Patch</h2>
+          <p id="beanPouchNote">Tap &ldquo;Plant a bean&rdquo; on the games you want us to focus on next.</p>
+        </div>
+      </div>
+      <div class="bean-pouch-status">
+        <span class="pouch-count"><span id="beansLeft">3</span> beans left to plant</span>
+        <button id="beanResetBtn" class="bean-reset-link" type="button">🌱 shake the patch (start over)</button>
+      </div>
+    </div>
+
     <div class="grid">
 
       <div class="game-card">
         <div class="thumb">Cover art coming soon</div>
         <div class="body">
-          <h3>Untitled Project One</h3>
-          <p>A short description of the game goes here — genre, tone, and what makes it worth playing.</p>
+          <h3>The Right Way</h3>
+          <p>A pixel-art top-down roguelite RPG combining a handcrafted overworld with ever-shifting procedural dungeons. Master deep character builds, conquer dynamic boss encounters, and forge your own path. </p>
           <div class="tags">
             <span class="tag free">Free forever</span>
             <span class="tag">PC</span>
           </div>
           <div class="status">Status: In development</div>
+          <div class="bean-patch" data-game="the-right-way">
+            <div class="bean-jar" title="Dig up a bean">
+              <span class="bean-jar-emoji">🫙</span>
+              <span class="beans-in-jar"></span>
+            </div>
+            <button class="bean-btn" type="button">🫘 Plant a bean</button>
+          </div>
         </div>
       </div>
 
       <div class="game-card">
         <div class="thumb">Cover art coming soon</div>
         <div class="body">
-          <h3>Untitled Project Two</h3>
-          <p>Swap this in for your next game's title, blurb, and platform once it's underway.</p>
+          <h3>DODO-Doku</h3>
+          <p>Looking for a game that soothes the soul but keeps your brain spinning? Welcome to DoDo Doku — a pure logic puzzle game that flawlessly blends the rigorous reasoning of Sudoku with the satisfying deduction of Minesweeper! </p>
           <div class="tags">
             <span class="tag free">Free forever</span>
             <span class="tag">PC</span>
+            <span class="tag">Mobile</span>
           </div>
-          <div class="status">Status: Concept</div>
+          <div class="status">Status: Open-Beta</div>
+          <div class="bean-patch" data-game="dodo-doku">
+            <div class="bean-jar" title="Dig up a bean">
+              <span class="bean-jar-emoji">🫙</span>
+              <span class="beans-in-jar"></span>
+            </div>
+            <button class="bean-btn" type="button">🫘 Plant a bean</button>
+          </div>
         </div>
       </div>
 
       <div class="game-card">
-        <div class="thumb">Your next idea here</div>
+        <div class="thumb">Cover art coming soon</div>
         <div class="body">
-          <h3>Got an idea?</h3>
-          <p>This is a placeholder slot — replace it as soon as a new project is greenlit.</p>
+          <h3>Cube(ish)</h3>
+          <p>Roll, Slide, absorb, and grow! A Katamari-inspired puzzle-adventure where every object you absorb increases your mass, unlocking new areas and pathing puzzles as you roll your way toward consuming the world.</p>
           <div class="tags">
-            <span class="tag">TBD</span>
+            <span class="tag">PC</span>
           </div>
-          <div class="status">Status: Not started</div>
+          <div class="status">Status: In development</div>
+          <div class="bean-patch" data-game="cubeish">
+            <div class="bean-jar" title="Dig up a bean">
+              <span class="bean-jar-emoji">🫙</span>
+              <span class="beans-in-jar"></span>
+            </div>
+            <button class="bean-btn" type="button">🫘 Plant a bean</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="thumb">Cover art coming soon</div>
+        <div class="body">
+          <h3>Ant Farm</h3>
+          <p>Nurture your very own subterranean ant colony in a cozy, virtual-pet idle sim! Feed your workers, level up your Queen, and watch your underground empire expand layer by layer. (Please do not shake the ant farm!)</p>
+          <div class="tags">
+            <span class="tag">PC</span>
+            <span class="tag">Mobile</span>
+          </div>
+          <div class="status">Status: Closed Beta</div>
+          <div class="bean-patch" data-game="ant-farm">
+            <div class="bean-jar" title="Dig up a bean">
+              <span class="bean-jar-emoji">🫙</span>
+              <span class="beans-in-jar"></span>
+            </div>
+            <button class="bean-btn" type="button">🫘 Plant a bean</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="thumb">Cover art coming soon</div>
+        <div class="body">
+          <h3>Untitled Project</h3>
+          <p>A cozy 3D point-and-click adventure set above the clouds. Gather resources, discover hidden sky secrets, and craft your very own floating paradise at your own peaceful pace.</p>
+          <div class="tags">
+            <span class="tag">PC</span>
+          </div>
+          <div class="status">Status: In Development</div>
+          <div class="bean-patch" data-game="untitled-project">
+            <div class="bean-jar" title="Dig up a bean">
+              <span class="bean-jar-emoji">🫙</span>
+              <span class="beans-in-jar"></span>
+            </div>
+            <button class="bean-btn" type="button">🫘 Plant a bean</button>
+          </div>
         </div>
       </div>
 
     </div>
 
     <p class="center mt-lg" style="color: var(--text-dim); font-size: 0.9rem;">
-      This is a rough draft page — replace these three placeholder cards with real
-      game entries (screenshots, download links, changelogs) as builds are ready.
+      Check out our discord for updates and game discussion, or just to say hi!
+
     </p>
   </section>
 
@@ -125,5 +201,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/beans.js"></script>
 </body>
 </html>
