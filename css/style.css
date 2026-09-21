@@ -650,3 +650,157 @@ section.block {
 }
 
 .badge-row .tag { font-size: 0.75rem; }
+
+/* ---------- The Bean Patch ---------- */
+
+.bean-pouch-bar {
+  max-width: var(--max-width);
+  margin: 0 auto 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bean-pouch-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 460px;
+}
+
+.bean-pouch-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  transform: rotate(-8deg);
+}
+
+.bean-pouch-heading h2 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.bean-pouch-heading p {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.bean-pouch-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.pouch-count {
+  font-weight: 700;
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.bean-reset-link {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bean-reset-link:hover { color: var(--accent); }
+
+@media (max-width: 620px) {
+  .bean-pouch-bar { flex-direction: column; align-items: stretch; }
+  .bean-pouch-status { align-items: flex-start; }
+}
+
+.bean-patch {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bean-jar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 2px 6px;
+  margin-left: -6px;
+  transition: background 0.15s ease;
+}
+
+.bean-jar:hover { background: rgba(255, 157, 61, 0.08); }
+
+.bean-patch-empty .bean-jar { cursor: default; }
+.bean-patch-empty .bean-jar:hover { background: none; }
+
+.bean-jar-emoji {
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+
+.beans-in-jar {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.bean-emoji {
+  font-size: 1rem;
+  display: inline-block;
+  animation: bean-pop 0.35s ease;
+}
+
+@keyframes bean-pop {
+  0% { transform: translateY(-10px) scale(0.5); opacity: 0; }
+  60% { transform: translateY(2px) scale(1.15); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.bean-jar-bounce { animation: bean-jar-shake 0.4s ease; }
+
+@keyframes bean-jar-shake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+
+.bean-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.bean-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.bean-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
