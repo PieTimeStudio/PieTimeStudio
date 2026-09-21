@@ -348,6 +348,7 @@ section.block {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .game-card .thumb {
@@ -813,8 +814,14 @@ section.block {
   border-color: var(--accent);
 }
 
-.bean-patch.bean-drop-hover .bean-jar {
-  background: rgba(255, 157, 61, 0.14);
+.game-card.bean-drop-hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 157, 61, 0.35);
+  transform: translateY(-2px);
+}
+
+.game-card.bean-drop-hover .bean-jar {
+  background: rgba(255, 157, 61, 0.18);
 }
 
 @keyframes bean-pop {

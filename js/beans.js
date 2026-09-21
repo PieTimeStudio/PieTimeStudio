@@ -159,8 +159,10 @@
     function findDropTarget(x, y) {
       const el = document.elementFromPoint(x, y);
       if (!el) return null;
-      const jarPatch = el.closest(".bean-patch");
-      if (jarPatch) return { type: "jar", game: jarPatch.dataset.game, el: jarPatch };
+      // The whole game panel counts as its jar's drop target, not just the
+      // small bean strip at the bottom of the card.
+      const card = el.closest(".game-card");
+      if (card && card.dataset.game) return { type: "jar", game: card.dataset.game, el: card };
       const pouchEl = el.closest("#beanPouchTray");
       if (pouchEl) return { type: "pouch", el: pouchEl };
       return null;
