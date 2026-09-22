@@ -410,16 +410,27 @@ section.block {
 
 .featured-games .section-head { margin-bottom: 32px; }
 
+.games-scroll-wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
 .games-scroll {
   display: flex;
   gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
-  padding: 4px 24px 20px;
-  margin: 0 -24px;
+  padding: 4px 4px 20px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
+}
+
+@media (max-width: 780px) {
+  .games-scroll {
+    padding: 4px 24px 20px;
+    margin: 0 -24px;
+  }
 }
 
 .games-scroll::-webkit-scrollbar { height: 8px; }
