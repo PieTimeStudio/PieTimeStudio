@@ -200,6 +200,16 @@ p { margin: 0 0 1em; }
   flex-wrap: wrap;
 }
 
+.hero-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero-link:hover { color: var(--accent); text-decoration: none; }
+
 /* ---------- Buttons ---------- */
 
 .btn {
@@ -394,6 +404,97 @@ section.block {
   color: var(--text-dim);
   padding-top: 14px;
   border-top: 1px solid var(--border);
+}
+
+/* ---------- Featured games scroller (homepage) ---------- */
+
+.featured-games .section-head { margin-bottom: 32px; }
+
+.games-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 4px 24px 20px;
+  margin: 0 -24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.games-scroll::-webkit-scrollbar { height: 8px; }
+.games-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+.games-scroll::-webkit-scrollbar-track { background: transparent; }
+
+.mini-game-card {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.mini-game-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.mini-thumb {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #2c2320, #1c1613);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 0 12px;
+}
+
+.mini-body { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+.mini-body h3 { font-size: 1rem; margin: 0; }
+
+.mini-body p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin: 0;
+  flex: 1;
+}
+
+.mini-body .tag { align-self: flex-start; }
+
+.mini-game-card-more {
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-style: dashed;
+}
+
+.mini-more-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dim);
+  font-weight: 700;
+  padding: 40px 20px;
+}
+
+.mini-game-card-more:hover .mini-more-inner { color: var(--accent); }
+
+.mini-more-arrow {
+  font-size: 1.6rem;
+  color: var(--accent);
 }
 
 /* ---------- Manifesto / quote ---------- */
