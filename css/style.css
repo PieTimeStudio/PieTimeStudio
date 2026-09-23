@@ -14,6 +14,8 @@
   --accent-2: #6fb98f;    /* mint, for "free/no-cost" accents */
   --danger: #e0674f;
   --radius: 14px;
+  --glow: rgba(255, 157, 61, 0.10);   /* top-of-page glow, same on every page */
+  --shadow-glow: rgba(255, 157, 61, 0.06);   /* orange shadow around boxes (same color, a bit fainter) */
   --max-width: 1080px;
   --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -81,6 +83,20 @@ p { margin: 0 0 1em; }
 }
 
 .brand:hover { text-decoration: none; }
+
+/* Header title: pill outline matching the "Support the Studio" button */
+.nav .brand {
+  padding: 8px 22px 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.nav .brand:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
 
 .brand-mark {
   font-size: 1.5rem;
@@ -165,7 +181,7 @@ p { margin: 0 0 1em; }
   padding: 32px 24px 20px;
   text-align: center;
   background:
-    radial-gradient(circle at 50% -50%, rgba(255, 157, 61, 0.18), transparent 55%),
+    radial-gradient(circle at 50% -50%, var(--glow), transparent 55%),
     var(--bg);
 }
 
@@ -289,7 +305,7 @@ p { margin: 0 0 1em; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px var(--shadow-glow);   /* orange, same color as the top-of-page glow */
 }
 
 /* Top half: heading, lighter tone */
@@ -357,12 +373,31 @@ section.block {
   margin: 0 auto;
 }
 
+/* Lighter outer box that wraps a whole section (e.g. "How we survive") */
+.panel-box {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 40px;
+  background: #2e2420;   /* a step lighter than the cards inside (--surface) */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px var(--shadow-glow);   /* orange, same color as the top-of-page glow */
+}
+
+@media (max-width: 780px) {
+  .panel-box { padding: 36px 20px; }
+}
+
 @media (max-width: 900px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Two-by-two grid (e.g. "What we're actually trying to prove" on Our Mission) */
+.grid.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
 @media (max-width: 620px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid,
+  .grid.grid-2 { grid-template-columns: 1fr; }
 }
 
 .card {
@@ -510,7 +545,11 @@ section.block.featured-games { padding-top: 20px; }
   gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
-  padding: 4px 4px 20px;
+  /* extra room so the cards' orange shadow isn't clipped; the negative
+     margin keeps the cards in the same place as before */
+  padding: 12px 16px 28px;
+  margin: -8px -12px 0;
+  scroll-padding-inline: 12px;   /* snap cards in line with the box above */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
@@ -518,8 +557,9 @@ section.block.featured-games { padding-top: 20px; }
 
 @media (max-width: 780px) {
   .games-scroll {
-    padding: 4px 24px 20px;
-    margin: 0 -24px;
+    padding: 12px 24px 28px;
+    margin: -8px -24px 0;
+    scroll-padding-inline: 24px;
   }
 }
 
@@ -652,6 +692,10 @@ section.block.featured-games { padding-top: 20px; }
 
 .compare tr:last-child td { border-bottom: none; }
 
+/* Table inside a box (Our Mission): dark brown like the cards in Home's boxes */
+.panel-box .compare { background: var(--bg-alt); }
+.panel-box .compare th { background: var(--bg-alt); }
+
 /* ---------- Donate / support page ---------- */
 
 .tier-grid {
@@ -676,7 +720,7 @@ section.block.featured-games { padding-top: 20px; }
 
 .tier.featured {
   border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 30px var(--shadow-glow);
 }
 
 .tier .amount {
@@ -738,11 +782,20 @@ section.block.featured-games { padding-top: 20px; }
 /* ---------- Newsletter / CTA band ---------- */
 
 .cta-band {
-  background: linear-gradient(120deg, rgba(255,157,61,0.14), rgba(111,185,143,0.08));
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 64px 24px;
+  /* Boxed card, same look as the Featured Games box */
+  width: calc(100% - 48px);
+  max-width: var(--max-width);
+  margin: 0 auto 72px;
+  padding: 48px 40px;
   text-align: center;
+  background: #2e2420;   /* same as .panel-box */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px var(--shadow-glow);   /* orange, same color as the top-of-page glow */
+}
+
+@media (max-width: 780px) {
+  .cta-band { padding: 36px 20px; }
 }
 
 .cta-band h2 { margin-bottom: 10px; }
@@ -814,9 +867,32 @@ section.block.featured-games { padding-top: 20px; }
 /* ---------- Page header (non-home pages) ---------- */
 
 .page-hero {
+  position: relative;
   padding: 72px 24px 48px;
   text-align: center;
-  background: radial-gradient(circle at 50% -10%, rgba(255, 157, 61, 0.14), transparent 55%);
+}
+
+/* Glow circle: drawn on a layer that can spill past the bottom of the
+   page header, so the sections below don't cut it off. */
+.page-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 800px;
+  /* Same geometry as the Home hero glow (circle at 50% -50%, fading out at 55%),
+     based on the Home hero's ~481px height on desktop. */
+  background: radial-gradient(circle 600px at 50% -240px, var(--glow), transparent);
+  background: radial-gradient(circle calc(0.55 * hypot(50vw, 721px)) at 50% -240px, var(--glow), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* On inner pages (not Home), the solid dark sections are 40% see-through
+   so the glow shows through them too. */
+main:has(.page-hero) .block-alt {
+  background: rgba(28, 22, 19, 0.6);   /* --bg-alt at 60% opacity */
 }
 
 .page-hero .eyebrow {
@@ -1063,3 +1139,27 @@ section.block.featured-games { padding-top: 20px; }
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* ---------- Orange box shadows on the other pages ---------- */
+/* Same orange as the top-of-page glow, like the big boxes on Home */
+.card,
+.game-card,
+.tier,
+.compare,
+.bean-pouch-bar,
+.mini-game-card {
+  box-shadow: 0 10px 30px var(--shadow-glow);
+}
+
+/* Tighter shadow for the small game cards in the Home scroller */
+.mini-game-card { box-shadow: 0 6px 16px var(--shadow-glow); }
+
+/* Boxes inside a box that already has the shadow */
+.panel-box .card,
+.panel-box .compare,
+.panel-box .tier { box-shadow: none; }
+.panel-box .tier.featured { box-shadow: 0 0 0 1px var(--accent); }
+
+/* Inner boxes on Support Us: dark brown like the cards in Home's boxes */
+.panel-box .tier,
+.panel-box .platform-links a { background: var(--bg-alt); }
