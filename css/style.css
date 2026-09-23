@@ -15,7 +15,7 @@
   --danger: #e0674f;
   --radius: 14px;
   --glow: rgba(255, 157, 61, 0.10);   /* top-of-page glow, same on every page */
-  --shadow-glow: rgba(255, 157, 61, 0.06);   /* orange shadow around boxes (same color, a bit fainter) */
+  --shadow-glow: rgba(255, 157, 61, 0.04);   /* orange shadow around boxes (same color, a bit fainter) */
   --max-width: 1080px;
   --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -120,6 +120,43 @@ p { margin: 0 0 1em; }
 .nav-links a.active {
   color: var(--accent);
   text-decoration: none;
+}
+
+/* Desktop: each tab is a pill outline, matching the "Pie Time Studio" title */
+@media (min-width: 781px) {
+  .nav-links { gap: 10px; align-items: center; }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .nav-links a:hover { transform: translateY(-2px); }
+
+  /* Donate keeps its orange fill, same height as the other tabs */
+  .nav-links a.nav-cta { border-color: var(--accent); padding: 8px 18px; }
+}
+
+.nav .brand,
+.nav-links a { white-space: nowrap; }
+
+/* Narrower desktop screens: slightly smaller pills so everything fits on one line */
+@media (min-width: 781px) and (max-width: 1040px) {
+  .nav { padding-left: 16px; padding-right: 16px; }
+  .nav-links { gap: 6px; }
+  .nav-links a { padding: 6px 11px; font-size: 0.85rem; }
+  .nav-links a.nav-cta { padding: 6px 13px; }
+  .nav .brand { font-size: 1.05rem; padding: 6px 16px 6px 12px; }
 }
 
 .nav-cta {
