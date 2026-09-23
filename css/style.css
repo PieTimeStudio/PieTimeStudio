@@ -57,8 +57,7 @@ p { margin: 0 0 1em; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(20, 16, 15, 0.9);
-  backdrop-filter: blur(8px);
+  background: var(--surface);      /* matches the lighter card boxes */
   border-bottom: 1px solid var(--border);
 }
 
@@ -139,7 +138,7 @@ p { margin: 0 0 1em; }
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--bg-alt);
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
     flex-direction: column;
     gap: 0;
@@ -163,10 +162,10 @@ p { margin: 0 0 1em; }
 /* ---------- Hero ---------- */
 
 .hero {
-  padding: 96px 24px 72px;
+  padding: 32px 24px 20px;
   text-align: center;
   background:
-    radial-gradient(circle at 50% -10%, rgba(255, 157, 61, 0.18), transparent 55%),
+    radial-gradient(circle at 50% -50%, rgba(255, 157, 61, 0.18), transparent 55%),
     var(--bg);
 }
 
@@ -177,7 +176,7 @@ p { margin: 0 0 1em; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.8rem;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .hero h1 {
@@ -188,7 +187,7 @@ p { margin: 0 0 1em; }
 
 .hero .lede {
   max-width: 620px;
-  margin: 0 auto 36px;
+  margin: 0 auto 28px;
   color: var(--text-dim);
   font-size: 1.1rem;
 }
@@ -275,6 +274,47 @@ p { margin: 0 0 1em; }
   color: var(--text-dim);
   font-size: 0.9rem;
   margin: 0;
+}
+
+/* ---------- Section card (two-tone split box, scroller width) ---------- */
+
+.section-card {
+  padding: 12px 24px 0;
+}
+
+/* Outer box: same width as the featured-games scroller below it */
+.section-card-box {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Top half: heading, lighter tone */
+.section-card .section-head {
+  max-width: none;
+  margin: 0;
+  padding: 24px 40px 20px;
+  background: var(--surface);
+}
+
+.section-card .section-head p { max-width: 640px; margin-left: auto; margin-right: auto; }
+.section-card .section-head p:last-child { margin-bottom: 0; }
+
+/* Bottom half: pledge icons, darker tone */
+.section-card .pledge-grid {
+  max-width: none;
+  margin: 0;
+  padding: 20px 40px 22px;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 780px) {
+  .section-card .section-head { padding: 24px 20px; }
+  .section-card .pledge-grid { padding: 24px 20px; }
 }
 
 /* ---------- Sections ---------- */
@@ -410,9 +450,59 @@ section.block {
 
 .featured-games .section-head { margin-bottom: 32px; }
 
+/* Tight gap under the section card so the scroller fits on the first screen */
+section.block.featured-games { padding-top: 20px; }
+
 .games-scroll-wrap {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
+}
+
+/* Scroll arrows: sit in the side margins, outside the scroller, so its width is unchanged */
+.scroll-arrow {
+  position: absolute;
+  top: calc(50% - 10px);            /* offset for the scrollbar space under the cards */
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.2s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.scroll-arrow:hover,
+.scroll-arrow:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.scroll-arrow-left  { left: -52px; }
+.scroll-arrow-right { right: -52px; }
+
+/* Hidden when there's nothing more to scroll in that direction */
+.scroll-arrow.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+/* Not enough side margin: overlay the arrows just inside the scroller edges */
+@media (max-width: 1199px) {
+  .scroll-arrow-left  { left: 8px; }
+  .scroll-arrow-right { right: 8px; }
+  .scroll-arrow { background: rgba(36, 28, 24, 0.92); }
 }
 
 .games-scroll {
