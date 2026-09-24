@@ -15,7 +15,7 @@
   --danger: #e0674f;
   --radius: 14px;
   --glow: rgba(255, 157, 61, 0.10);   /* top-of-page glow, same on every page */
-  --shadow-glow: rgba(255, 157, 61, 0.04);   /* orange shadow around boxes (same color, a bit fainter) */
+  --shadow-glow: rgba(255, 157, 61, 0.046);   /* orange shadow around boxes (same color, a bit fainter) */
   --max-width: 1080px;
   --font-head: "Poppins", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -1200,3 +1200,29 @@ main:has(.page-hero) .block-alt {
 /* Inner boxes on Support Us: dark brown like the cards in Home's boxes */
 .panel-box .tier,
 .panel-box .platform-links a { background: var(--bg-alt); }
+
+/* ---------- Clickable game cards (have a data-href link) ---------- */
+.game-card-link { cursor: pointer; }
+.game-card-link .bean-patch { cursor: default; }
+.game-card-link:hover,
+.game-card-link:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* ---------- Whole-box links (e.g. Community card on Contact) ---------- */
+a.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+a.card-link:hover,
+a.card-link:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+  outline: none;
+}
+a.card-link:hover p { color: var(--accent); }

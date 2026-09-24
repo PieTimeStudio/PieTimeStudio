@@ -59,3 +59,34 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = new Date().getFullYear();
   }
 });
+
+// ---------- Clickable game cards ----------
+// Cards with data-href open that link when clicked, except clicks on the
+// bean patch (jar + plant button) or the end of a bean drag.
+(function () {
+  let downX = 0, downY = 0;
+  document.addEventListener("pointerdown", (e) => { downX = e.clientX; downY = e.clientY; });
+
+  function openCard(card) {
+    const url = card.dataset.href;
+    window.open(url, "_blank", "noopener"); // always a new tab
+  }
+
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".game-card[data-href]");
+    if (!card || e.target.closest(".bean-patch, a, button")) return;
+    if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return; // was a drag
+    openCard(card);
+  });
+
+  document.addEventListener("auxclick", (e) => {
+    const card = e.target.closest(".game-card[data-href]");
+    if (card && e.button === 1 && !e.target.closest(".bean-patch")) openCard(card);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    const card = e.target.closest && e.target.closest(".game-card[data-href]");
+    if (card && e.target === card) openCard(card);
+  });
+})();
