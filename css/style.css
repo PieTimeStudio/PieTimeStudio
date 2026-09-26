@@ -755,6 +755,17 @@ section.block.featured-games { padding-top: 20px; }
   text-align: center;
 }
 
+/* Stack tier content so the buttons line up at the bottom of every box */
+.tier {
+  display: flex;
+  flex-direction: column;
+}
+
+.tier .btn {
+  margin-top: auto;
+  align-self: center;
+}
+
 .tier.featured {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent), 0 10px 30px var(--shadow-glow);
@@ -814,6 +825,27 @@ section.block.featured-games { padding-top: 20px; }
   border-color: var(--accent);
   color: var(--accent);
   text-decoration: none;
+}
+
+.coming-soon {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-alt);
+  border: 2px dashed var(--accent);
+  padding: 16px 32px;
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* ---------- Newsletter / CTA band ---------- */
