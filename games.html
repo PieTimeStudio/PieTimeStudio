@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#14100f">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Games — Pie Time Studio</title>
 <meta name="description" content="Free games from Pie Time Studio. No ads, no pay-to-win, no catches — download and keep.">
+<script>/* page order + slide direction for page transitions */(function(){var o=["index","about","games","support","contact"],d=document.documentElement,n=(location.pathname.split("/").pop()||"index.html").replace(/\.html?$/,""),c=o.indexOf(n),p=null;if(c<0)c=0;try{p=sessionStorage.getItem("ptsPage");sessionStorage.setItem("ptsPage",c)}catch(e){}if(p!==null&&+p!==c)d.classList.add(+p<c?"nav-fwd":"nav-back");if(document.startViewTransition&&/^https?:$/.test(location.protocol))d.classList.add("vt")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/seeds.css">
 </head>
 <body>
 
 <header class="site-header">
   <nav class="nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">🥧</span> Pie Time Studio
+      <span class="brand-mark" aria-hidden="true"></span> Pie Time Studio
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
@@ -39,16 +45,83 @@
 
   <section class="block">
 
-    <div class="bean-pouch-bar">
-      <div class="bean-pouch-heading">
-        <span class="bean-pouch-icon">🫘</span>
+    <div class="seed-bag-bar">
+      <div class="seed-bag-heading">
+        <span class="seed-bag-icon">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 42V22" stroke="#4f8f68" stroke-width="3" stroke-linecap="round"/>
+            <path d="M24 27C14 27 9 20 9 12c9 0 15 5 15 15z" fill="#6fb98f"/>
+            <path d="M24 23c0-9 6-14 15-14 0 9-6 14-15 14z" fill="#8fd1ab"/>
+            <path d="M24 30c-4 1-6 4-6 6" stroke="#4f8f68" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <path d="M12 42h24" stroke="#7a4a1a" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
         <div>
-          <h2>The Bean Patch</h2>
-          <p id="beanPouchNote">Drag a bean onto the games you want us to focus on next.</p>
+          <h2>The Seed Bag</h2>
+          <p id="seedBagNote">Plant a seed on the games you like. The more seeds a game gets, the more its vines grow.</p>
         </div>
       </div>
-      <div class="bean-pouch-tray" id="beanPouchTray" aria-label="Your beans — drag one onto a game below"></div>
-      <button id="beanResetBtn" class="bean-reset-link" type="button">🌱 NO BEANS FOR YOU! (start over)</button>
+      <div class="seed-bag" id="seedBag" role="button" tabindex="0" aria-label="Seed bag">
+        <svg class="seed-bag-art" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="sbSack" x1="0" x2="1">
+              <stop offset="0" stop-color="#6e4e2c"/><stop offset=".45" stop-color="#b48c58"/><stop offset=".7" stop-color="#a47c48"/><stop offset="1" stop-color="#5e4024"/>
+            </linearGradient>
+            <radialGradient id="sbShade" cx=".38" cy=".35" r=".75">
+              <stop offset="0" stop-color="#fff2d6" stop-opacity=".28"/><stop offset=".55" stop-color="#fff2d6" stop-opacity="0"/><stop offset="1" stop-color="#1a0f06" stop-opacity=".45"/>
+            </radialGradient>
+            <linearGradient id="sbTop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c9a36c"/><stop offset="1" stop-color="#8e6a3a"/>
+            </linearGradient>
+            <pattern id="sbWeave" width="3" height="3" patternUnits="userSpaceOnUse">
+              <path d="M0 .75h3M.75 0v3" stroke="#3a2412" stroke-opacity=".22" stroke-width=".6"/>
+            </pattern>
+            <radialGradient id="sbSeed" cx=".35" cy=".3" r=".8">
+              <stop offset="0" stop-color="#ffe0a3"/><stop offset=".6" stop-color="#d9a05a"/><stop offset="1" stop-color="#8a5a24"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="32" cy="60.5" rx="21" ry="2.8" fill="#000" opacity=".35"/>
+          <!-- sack body -->
+          <path d="M19 27C9 35 7 50 12 56c4 4.5 12 5.5 20 5.5s16-1 20-5.5c5-6 3-21-7-29z" fill="url(#sbSack)" stroke="#3a2412" stroke-width="1.2"/>
+          <path d="M19 27C9 35 7 50 12 56c4 4.5 12 5.5 20 5.5s16-1 20-5.5c5-6 3-21-7-29z" fill="url(#sbWeave)"/>
+          <path d="M19 27C9 35 7 50 12 56c4 4.5 12 5.5 20 5.5s16-1 20-5.5c5-6 3-21-7-29z" fill="url(#sbShade)"/>
+          <path d="M22 31c-3 6-4 14-2 22M42 31c3 6 4 14 2 22" stroke="#3a2412" stroke-opacity=".35" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <!-- patch -->
+          <path d="M44 44l6 1-1 6-6-1z" fill="#8a6536" stroke="#3a2412" stroke-width=".7"/>
+          <path d="M44.6 45.2l4.6.8M44.3 47.3l4.6.8M44 49.4l4.6.8" stroke="#e9d6b3" stroke-opacity=".55" stroke-width=".5" stroke-dasharray="1 .8"/>
+          <!-- gathered neck -->
+          <path d="M21 27c1-3.5 1.6-6.5 1.4-9.5h19.2c-.2 3 .4 6 1.4 9.5z" fill="#8e6a3a" stroke="#3a2412" stroke-width="1"/>
+          <path d="M25.5 18v8.5M29.5 18v9M34 18v9M38.5 18v8.5" stroke="#3a2412" stroke-opacity=".4" stroke-width=".9"/>
+          <!-- ruffled top with seeds peeking out -->
+          <ellipse cx="32" cy="15.5" rx="10.5" ry="3.4" fill="#2a1a0c"/>
+          <ellipse cx="28" cy="14.2" rx="2" ry="2.8" transform="rotate(-25 28 14.2)" fill="url(#sbSeed)" stroke="#6b4420" stroke-width=".6"/>
+          <ellipse cx="32.5" cy="13.4" rx="2" ry="2.8" transform="rotate(10 32.5 13.4)" fill="url(#sbSeed)" stroke="#6b4420" stroke-width=".6"/>
+          <ellipse cx="36.6" cy="14.6" rx="1.9" ry="2.6" transform="rotate(35 36.6 14.6)" fill="url(#sbSeed)" stroke="#6b4420" stroke-width=".6"/>
+          <path d="M20.5 16c-2.5-2-2-5.5.8-6 .6-2.6 3.6-3.4 5.2-1.3 1.3-2.4 4.7-2.6 5.8-.2 1.4-2.2 4.8-1.8 5.5.6 2.8-.7 5 1.9 3.6 4.4 2.3.8 2.2 3.4.1 4.3-3 1.5-18 1.5-21-1.8z" fill="none" stroke="#3a2412" stroke-width="1"/>
+          <path d="M20.5 16c-2.5-2-2-5.5.8-6 .6-2.6 3.6-3.4 5.2-1.3 1.3-2.4 4.7-2.6 5.8-.2 1.4-2.2 4.8-1.8 5.5.6 2.8-.7 5 1.9 3.6 4.4 2.3.8 2.2 3.4.1 4.3" fill="none" stroke="url(#sbTop)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M21.3 10c.9 1.5.8 3 .3 4.4M26.5 8.7c.3 1.6 0 3-.5 4.3M37.8 9.1c-.4 1.5-.1 2.9.4 4.2" stroke="#3a2412" stroke-opacity=".45" stroke-width=".8" fill="none"/>
+          <!-- rope tie -->
+          <path d="M20.2 25.6c7 3 16.6 3 23.6 0" stroke="#e0b46a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M20.2 25.6c7 3 16.6 3 23.6 0" stroke="#7a4a1a" stroke-width="3" stroke-dasharray="1.2 1.6" fill="none"/>
+          <path d="M44 26c3 2 4 6 3.5 10M44 26c4.5 0 7 3 7.5 6.5" stroke="#e0b46a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M44 26c3 2 4 6 3.5 10M44 26c4.5 0 7 3 7.5 6.5" stroke="#7a4a1a" stroke-width="2" stroke-dasharray="1 1.4" fill="none"/>
+          <path d="M46.3 36l1.2 3 1.2-3M50.3 32.5l1.2 3 1.4-2.8" stroke="#e0b46a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <circle cx="44" cy="26" r="2.6" fill="#e0b46a" stroke="#7a4a1a" stroke-width="1"/>
+          <!-- stitched label -->
+          <g transform="rotate(-5 30 44)">
+            <rect x="21" y="36" width="18" height="15" rx="1.5" fill="#efdfbf" stroke="#9a7a52" stroke-width=".8"/>
+            <rect x="22.6" y="37.6" width="14.8" height="11.8" rx="1" fill="none" stroke="#9a7a52" stroke-width=".7" stroke-dasharray="1.4 1.1"/>
+            <path d="M30 48v-5.5" stroke="#3f7a55" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M30 44.5c-3 0-4.4-1.8-4.4-4 2.8 0 4.4 1.5 4.4 4z" fill="#6fb98f"/>
+            <path d="M30 43.5c0-2.6 1.6-4 4.4-4 0 2.6-1.6 4-4.4 4z" fill="#8fd1ab"/>
+          </g>
+          <!-- spilled seeds -->
+          <ellipse cx="55" cy="58.6" rx="1.8" ry="2.6" transform="rotate(62 55 58.6)" fill="url(#sbSeed)" stroke="#6b4420" stroke-width=".6"/>
+          <ellipse cx="59.2" cy="56.8" rx="1.6" ry="2.3" transform="rotate(-30 59.2 56.8)" fill="url(#sbSeed)" stroke="#6b4420" stroke-width=".6"/>
+        </svg>
+        <span class="seed-bag-count"><span id="seedBagCount">5</span> <span class="seed-bag-count-label">seeds</span></span>
+      </div>
+      <button id="seedResetBtn" class="seed-reset-link" type="button">Dig up all my seeds (start over)</button>
     </div>
 
     <div class="grid">
@@ -63,12 +136,13 @@
             <span class="tag">PC</span>
           </div>
           <div class="status">Status: In development</div>
-          <div class="bean-patch" data-game="the-right-way">
-            <div class="bean-jar" title="Dig up a bean">
-              <span class="bean-jar-emoji">🫙</span>
-              <span class="beans-in-jar"></span>
+          <div class="seed-plot" data-game="the-right-way">
+            <div class="seed-count" aria-live="polite">
+              <span class="seed-count-sprout" aria-hidden="true"></span>
+              <span class="seed-count-num">0</span>
+              <span class="seed-count-label">seeds planted</span>
             </div>
-            <button class="bean-btn" type="button">🫘 Tap to plant</button>
+            <div class="my-seeds"></div>
           </div>
         </div>
       </div>
@@ -84,12 +158,13 @@
             <span class="tag">Mobile</span>
           </div>
           <div class="status">Status: Open-Beta</div>
-          <div class="bean-patch" data-game="dodo-doku">
-            <div class="bean-jar" title="Dig up a bean">
-              <span class="bean-jar-emoji">🫙</span>
-              <span class="beans-in-jar"></span>
+          <div class="seed-plot" data-game="dodo-doku">
+            <div class="seed-count" aria-live="polite">
+              <span class="seed-count-sprout" aria-hidden="true"></span>
+              <span class="seed-count-num">0</span>
+              <span class="seed-count-label">seeds planted</span>
             </div>
-            <button class="bean-btn" type="button">🫘 Tap to plant</button>
+            <div class="my-seeds"></div>
           </div>
         </div>
       </div>
@@ -103,12 +178,13 @@
             <span class="tag">PC</span>
           </div>
           <div class="status">Status: In development</div>
-          <div class="bean-patch" data-game="cubeish">
-            <div class="bean-jar" title="Dig up a bean">
-              <span class="bean-jar-emoji">🫙</span>
-              <span class="beans-in-jar"></span>
+          <div class="seed-plot" data-game="cubeish">
+            <div class="seed-count" aria-live="polite">
+              <span class="seed-count-sprout" aria-hidden="true"></span>
+              <span class="seed-count-num">0</span>
+              <span class="seed-count-label">seeds planted</span>
             </div>
-            <button class="bean-btn" type="button">🫘 Tap to plant</button>
+            <div class="my-seeds"></div>
           </div>
         </div>
       </div>
@@ -123,12 +199,13 @@
             <span class="tag">Mobile</span>
           </div>
           <div class="status">Status: Closed Beta</div>
-          <div class="bean-patch" data-game="ant-farm">
-            <div class="bean-jar" title="Dig up a bean">
-              <span class="bean-jar-emoji">🫙</span>
-              <span class="beans-in-jar"></span>
+          <div class="seed-plot" data-game="ant-farm">
+            <div class="seed-count" aria-live="polite">
+              <span class="seed-count-sprout" aria-hidden="true"></span>
+              <span class="seed-count-num">0</span>
+              <span class="seed-count-label">seeds planted</span>
             </div>
-            <button class="bean-btn" type="button">🫘 Tap to plant</button>
+            <div class="my-seeds"></div>
           </div>
         </div>
       </div>
@@ -142,12 +219,13 @@
             <span class="tag">PC</span>
           </div>
           <div class="status">Status: In Development</div>
-          <div class="bean-patch" data-game="untitled-project">
-            <div class="bean-jar" title="Dig up a bean">
-              <span class="bean-jar-emoji">🫙</span>
-              <span class="beans-in-jar"></span>
+          <div class="seed-plot" data-game="untitled-project">
+            <div class="seed-count" aria-live="polite">
+              <span class="seed-count-sprout" aria-hidden="true"></span>
+              <span class="seed-count-num">0</span>
+              <span class="seed-count-label">seeds planted</span>
             </div>
-            <button class="bean-btn" type="button">🫘 Tap to plant</button>
+            <div class="my-seeds"></div>
           </div>
         </div>
       </div>
@@ -171,7 +249,7 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="index.html" class="brand"><span class="brand-mark">🥧</span> Pie Time Studio</a>
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span> Pie Time Studio</a>
       <p>Free games. No ads. No pay-to-win. No money-grab skins. Just games you actually own, made possible by the people who play them.</p>
     </div>
     <div class="footer-links">
@@ -199,6 +277,6 @@
 </footer>
 
 <script src="js/main.js"></script>
-<script src="js/beans.js"></script>
+<script src="js/seeds.js"></script>
 </body>
 </html>

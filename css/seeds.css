@@ -1,0 +1,482 @@
+/* =====================================================
+   The Seed Bag — like system with growing vines (Games page)
+   Uses the colour tokens from style.css
+   ===================================================== */
+
+:root {
+  --vine: #4f8f68;
+  --leaf: #6fb98f;         /* the site's mint */
+  --leaf-dark: #4f8f68;
+  --seed: #d9b27c;
+}
+
+/* ---------- The bag bar ---------- */
+
+.seed-bag-bar {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto 40px;
+  padding: 26px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  flex-wrap: wrap;
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(111,185,143,.08), transparent 55%),
+    var(--panel);
+  border: 1px solid #0d0a09;
+  border-radius: var(--radius);
+  box-shadow: var(--frame), 0 14px 30px rgba(0,0,0,.45);
+}
+
+.seed-bag-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    var(--brick-tl) top left / 64px no-repeat,
+    var(--brick-tr) top right / 64px no-repeat,
+    var(--brick-bl) bottom left / 64px no-repeat,
+    var(--brick-br) bottom right / 64px no-repeat;
+}
+
+.seed-bag-heading { display: flex; align-items: center; gap: 16px; max-width: 500px; }
+
+.seed-bag-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 66px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(111,185,143,.22), transparent 70%),
+    linear-gradient(180deg, var(--panel), var(--bg-alt));
+  border: 2px solid var(--accent-dim);
+  border-radius: 8px 8px 50% 50% / 8px 8px 60% 60%;
+  box-shadow: inset 0 0 0 3px var(--bg-alt), inset 0 0 0 4px var(--gold-line), 0 6px 14px rgba(0,0,0,.4);
+  transform: rotate(-4deg);
+}
+.seed-bag-icon svg { width: 46px; height: 46px; margin-top: -4px; }
+
+.seed-bag-heading h2 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent-hi); }
+.seed-bag-heading p { color: var(--text-dim); font-size: 1rem; margin: 0; }
+
+.seed-bag-tray {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  min-width: 150px;
+  padding: 8px 18px;
+  background: var(--bg-alt);
+  border: 2px dashed var(--accent-dim);
+  border-radius: var(--radius);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.5);
+  transition: border-color .15s ease, background .15s ease;
+}
+.seed-bag-tray-empty { border-style: solid; border-color: var(--border); }
+.seed-bag-tray-empty::after { content: "bag empty"; color: var(--text-dim); font-size: .95rem; font-style: italic; }
+.seed-bag-tray.seed-drop-hover { border-color: var(--leaf); background: rgba(111,185,143,.1); }
+
+.seed-reset-link {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-head);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+}
+.seed-reset-link:hover { color: var(--accent); }
+
+@media (max-width: 620px) {
+  .seed-bag-bar { flex-direction: column; align-items: stretch; padding: 26px 24px; }
+  .seed-bag-tray { justify-content: center; }
+  .seed-reset-link { white-space: normal; }
+}
+
+/* ---------- Seeds ---------- */
+
+.seed-token {
+  display: inline-flex;
+  width: 20px;
+  height: 25px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.45));
+  transition: transform .12s ease;
+  animation: seed-pop .35s ease;
+}
+.seed-token svg { width: 100%; height: 100%; }
+.seed-token:hover { transform: scale(1.18) rotate(-8deg); }
+.seed-token:active { cursor: grabbing; }
+.seed-token:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.seed-token-dragging { opacity: .25; }
+
+.my-seeds .seed-token { width: 14px; height: 18px; cursor: pointer; }
+
+.seed-drag-ghost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 30px;
+  height: 38px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.5));
+}
+.seed-drag-ghost svg { width: 100%; height: 100%; }
+
+@keyframes seed-pop {
+  0% { transform: translateY(-8px) scale(.4); opacity: 0; }
+  60% { transform: translateY(2px) scale(1.15); opacity: 1; }
+  100% { transform: none; }
+}
+
+/* ---------- Seed plot on each game card ---------- */
+
+.seed-plot {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.seed-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: .95rem;
+}
+
+.seed-count-sprout {
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 19v-8' stroke='%234f8f68' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M10 12C5 12 3 9 3 5c4 0 7 2 7 7zM10 10c0-4 2.5-6.5 7-6.5 0 4-2.5 6.5-7 6.5z' fill='%236fb98f'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.seed-count-num {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--leaf);
+  min-width: 1ch;
+}
+.seed-count-num.pop { animation: count-pop .4s ease; display: inline-block; }
+@keyframes count-pop { 0% { transform: scale(1); } 40% { transform: scale(1.45); color: #a6e3bf; } 100% { transform: scale(1); } }
+
+.my-seeds { display: inline-flex; gap: 3px; margin-left: 2px; }
+
+.seed-btn {
+  margin-left: auto;
+  background: linear-gradient(180deg, var(--panel), var(--bg-alt));
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .15s ease, color .15s ease, transform .15s ease;
+}
+.seed-btn:hover:not(:disabled) { border-color: var(--leaf); color: var(--leaf); transform: translateY(-1px); }
+.seed-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Drop feedback ---------- */
+
+.game-card.seed-drop-hover {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 2px rgba(111,185,143,.4), 0 0 26px rgba(111,185,143,.2);
+  transform: translateY(-2px);
+}
+
+.game-card.seed-landed { animation: card-rustle .5s ease; }
+@keyframes card-rustle {
+  0%, 100% { transform: none; }
+  30% { transform: rotate(-.6deg) translateY(-2px); }
+  60% { transform: rotate(.5deg); }
+}
+
+/* ---------- Vines ---------- */
+
+.game-card { position: relative; }
+
+.vine-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  overflow: visible;
+}
+
+.vine-stem {
+  fill: none;
+  stroke: var(--vine);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.6));
+  transition: stroke-dashoffset 1.4s cubic-bezier(.3,.7,.3,1);
+}
+
+.vine-leaf,
+.vine-curl,
+.vine-flower {
+  transform-box: fill-box;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.3,1.6,.5,1), opacity .3s ease;
+}
+
+.vine-leaf {
+  fill: var(--leaf);
+  stroke: var(--leaf-dark);
+  stroke-width: .8;
+  transform-origin: left center;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
+}
+.vine-leaf-alt { fill: #5fa87f; }
+
+.vine-curl {
+  fill: none;
+  stroke: var(--vine);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  transform-origin: left top;
+}
+
+.vine-flower { transform-origin: center; }
+.vine-flower .petal { fill: #f3ece2; stroke: #d8c9b4; stroke-width: .5; }
+.vine-flower .flower-mid { fill: var(--accent); }
+.vine-flower-alt .petal { fill: var(--accent-hi); stroke: var(--accent-dim); }
+.vine-flower-alt .flower-mid { fill: #fff4e0; }
+
+.vine-leaf.on,
+.vine-curl.on,
+.vine-flower.on { transform: scale(1); opacity: 1; }
+
+/* Leaves pop in a little after the stem reaches them */
+.vine-leaf.on { transition-delay: .35s; }
+.vine-flower.on { transition-delay: .9s; }
+
+/* No animation when first drawn or resized */
+.vine-instant .vine-stem,
+.vine-instant .vine-leaf,
+.vine-instant .vine-curl,
+.vine-instant .vine-flower { transition: none !important; }
+
+/* ---------- Most-loved badge ---------- */
+
+.game-card.most-loved { border-color: rgba(111,185,143,.55); }
+
+.game-card.most-loved .thumb::after {
+  content: "♛  Most loved";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 14px;
+  font-family: var(--font-head);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  white-space: nowrap;
+  color: var(--ink);
+  background: linear-gradient(180deg, #a6e3bf, var(--leaf));
+  border: 1px solid #2f5a40;
+  border-radius: var(--radius);
+  box-shadow: 0 0 14px rgba(111,185,143,.35);
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vine-stem, .vine-leaf, .vine-curl, .vine-flower, .seed-token { transition: none !important; animation: none !important; }
+}
+
+/* Room for the vines so leaves don't cover the text */
+.game-card .body { padding-left: 32px; padding-right: 32px; }
+
+/* =====================================================
+   v2 — one grabbable seed bag, one seed per game
+   ===================================================== */
+
+.seed-bag {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 22px 6px 10px;
+  background: var(--bg-alt);
+  border: 2px dashed var(--accent-dim);
+  border-radius: var(--radius);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.5);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.seed-bag:hover { border-color: var(--leaf); }
+.seed-bag:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.seed-bag-art {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 4px 5px rgba(0,0,0,.5));
+  transform-origin: 50% 90%;
+  transition: transform .15s ease;
+}
+.seed-bag:hover .seed-bag-art { transform: rotate(-6deg) scale(1.05); }
+.seed-bag-grabbing .seed-bag-art { animation: bag-shake .35s ease; }
+@keyframes bag-shake { 0%,100% { transform: none; } 30% { transform: rotate(-9deg); } 65% { transform: rotate(6deg); } }
+
+.seed-bag-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+#seedBagCount {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--leaf);
+}
+.seed-bag-count-label {
+  font-family: var(--font-head);
+  font-size: .66rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.seed-bag-empty { cursor: default; border-style: solid; border-color: var(--border); }
+.seed-bag-empty .seed-bag-art { opacity: .45; filter: grayscale(.6); }
+.seed-bag-empty:hover .seed-bag-art { transform: none; }
+.seed-bag-empty #seedBagCount { color: var(--text-dim); }
+
+/* Tap mode: a seed is in hand */
+.seed-bag-holding {
+  border-style: solid;
+  border-color: var(--leaf);
+  background: rgba(111,185,143,.12);
+  box-shadow: 0 0 0 3px rgba(111,185,143,.25), 0 0 20px rgba(111,185,143,.25);
+}
+.seed-bag-holding .seed-bag-art { animation: bag-bob 1s ease-in-out infinite; }
+@keyframes bag-bob { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg) translateY(-2px); } }
+body.seed-holding .game-card { cursor: copy; }
+body.seed-holding .game-card:hover { border-color: var(--leaf); box-shadow: 0 0 0 2px rgba(111,185,143,.4); }
+
+.seed-drop-hover.seed-bag { border-color: var(--leaf); background: rgba(111,185,143,.1); }
+
+/* Header shield now shows a sprout */
+.seed-bag-icon { transform: none; }
+.seed-bag-icon svg { width: 40px; height: 40px; margin-top: -6px; }
+
+/* Seed plot: count on the left, your seed on the right */
+.seed-plot { justify-content: space-between; min-height: 30px; }
+.my-seeds { align-items: center; gap: 3px; flex-wrap: wrap; }
+.my-seed-label { margin-left: 3px; }
+.my-seeds .seed-token { width: 16px; height: 20px; }
+.my-seed-label {
+  font-family: var(--font-head);
+  font-size: .64rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--leaf);
+}
+
+@media (max-width: 620px) {
+  .seed-bag { justify-content: center; }
+}
+
+/* v3 — new seed + bag art sizes */
+.seed-bag-art { width: 76px; height: 76px; }
+.my-seeds .seed-token { width: 18px; height: 23px; }
+.seed-drag-ghost {
+  width: 40px;
+  height: 50px;
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(255,177,94,.35));
+  animation: ghost-wobble .6s ease-in-out infinite alternate;
+}
+@keyframes ghost-wobble { from { transform: translate(-50%, -50%) rotate(-14deg); } to { transform: translate(-50%, -50%) rotate(6deg); } }
+
+/* =====================================================
+   v4 — sturdier, darker, thorny vines
+   ===================================================== */
+:root {
+  --vine: #2c5438;          /* darker green stem */
+  --vine-dark: #142a1b;
+  --vine-shine: #4d8560;
+  --leaf: #6fb98f;          /* (still the site's mint for the UI) */
+}
+
+.vine-stem-outline,
+.vine-stem,
+.vine-stem-shine,
+.vine-strand {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.3,.7,.3,1);
+}
+.vine-stem-outline { stroke: var(--vine-dark); stroke-width: 7; filter: drop-shadow(0 2px 2px rgba(0,0,0,.6)); }
+.vine-stem         { stroke: var(--vine); stroke-width: 4.6; filter: none; }
+.vine-stem-shine   { stroke: var(--vine-shine); stroke-width: 1.2; stroke-opacity: .7; transform: translate(-.8px, -.6px); }
+.vine-strand       { stroke: #1f3d29; stroke-width: 2.6; filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
+
+.vine-thorn {
+  fill: #c98a52;
+  stroke: #3b200f;
+  stroke-width: .7;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: left bottom;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform .35s cubic-bezier(.3,1.6,.5,1), opacity .25s ease;
+  transition-delay: .25s;
+}
+.vine-thorn.on { transform: scale(1); opacity: 1; }
+
+.vine-leaf     { fill: #3f7a50; stroke: #173320; stroke-width: .9; }
+.vine-leaf-alt { fill: #356b45; }
+.vine-curl     { stroke: var(--vine); stroke-width: 1.8; }
+
+.vine-instant .vine-stem-outline,
+.vine-instant .vine-stem-shine,
+.vine-instant .vine-strand,
+.vine-instant .vine-thorn { transition: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vine-stem-outline, .vine-stem-shine, .vine-strand, .vine-thorn { transition: none !important; }
+}
+
+/* =====================================================
+   v5 — gold reserved for clickable things
+   ===================================================== */
+.seed-bag-heading h2 { color: var(--parchment, #e9d6b3); }
+.seed-bag-icon { border-color: #6b5443; }
+.game-card.most-loved .thumb::after { color: var(--ink); }

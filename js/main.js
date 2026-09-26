@@ -74,19 +74,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".game-card[data-href]");
-    if (!card || e.target.closest(".bean-patch, a, button")) return;
+    if (!card || e.target.closest(".bean-patch, .seed-plot, a, button")) return;
     if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return; // was a drag
     openCard(card);
   });
 
   document.addEventListener("auxclick", (e) => {
     const card = e.target.closest(".game-card[data-href]");
-    if (card && e.button === 1 && !e.target.closest(".bean-patch")) openCard(card);
+    if (card && e.button === 1 && !e.target.closest(".bean-patch, .seed-plot")) openCard(card);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter") return;
     const card = e.target.closest && e.target.closest(".game-card[data-href]");
     if (card && e.target === card) openCard(card);
+  });
+})();
+
+// ---------- Page transitions: slide left/right ----------
+// Pages are in a row: Home → Our Mission → Games → Support Us → Contact.
+// Browsers with cross-page View Transitions do the slide in CSS (style.css).
+// Otherwise: slide this page out, then open the next one (which slides in).
+(function () {
+  const ORDER = ["index", "about", "games", "support", "contact"];
+  const pageIndex = (path) => {
+    const name = (path.split("/").pop() || "index.html").replace(/\.html?$/, "");
+    const i = ORDER.indexOf(name);
+    return i < 0 ? 0 : i;
+  };
+
+  const usesViewTransitions = document.documentElement.classList.contains("vt");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (usesViewTransitions || reduceMotion) return;
+
+  const LEAVING = ["leaving-fwd", "leaving-back", "leaving-fade"];
+
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const link = e.target.closest("a[href]");
+    if (!link || (link.target && link.target !== "_self") || link.hasAttribute("download")) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#") || /^(mailto|tel|javascript):/i.test(href)) return;
+    const url = new URL(link.href, location.href);
+    if (url.origin !== location.origin && location.protocol !== "file:") return;   // external site
+    if (!/\.html?$|\/$/.test(url.pathname)) return;                               // only our pages
+    if (url.pathname === location.pathname) return;                               // same page
+
+    const from = pageIndex(location.pathname), to = pageIndex(url.pathname);
+    e.preventDefault();
+    document.body.classList.add(to > from ? "leaving-fwd" : to < from ? "leaving-back" : "leaving-fade");
+    setTimeout(() => { location.href = link.href; }, 190);
+  });
+
+  // Coming back with the browser's Back button can restore the slid-out page; undo that.
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) document.body.classList.remove(...LEAVING);
   });
 })();

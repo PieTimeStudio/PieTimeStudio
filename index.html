@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#14100f">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pie Time Studio — Free Games. No Ads. No Catches. You Own It.</title>
 <meta name="description" content="Pie Time Studio makes games that cost nothing, own nothing over you, and belong to you once you have them. Funded entirely by the people who play them.">
+<script>/* page order + slide direction for page transitions */(function(){var o=["index","about","games","support","contact"],d=document.documentElement,n=(location.pathname.split("/").pop()||"index.html").replace(/\.html?$/,""),c=o.indexOf(n),p=null;if(c<0)c=0;try{p=sessionStorage.getItem("ptsPage");sessionStorage.setItem("ptsPage",c)}catch(e){}if(p!==null&&+p!==c)d.classList.add(+p<c?"nav-fwd":"nav-back");if(document.startViewTransition&&/^https?:$/.test(location.protocol))d.classList.add("vt")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +17,7 @@
 <header class="site-header">
   <nav class="nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">🥧</span> Pie Time Studio
+      <span class="brand-mark" aria-hidden="true"></span> Pie Time Studio
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
@@ -53,22 +58,22 @@
     </div>
     <div class="pledge-grid">
       <div class="pledge-item">
-        <div class="icon">💸</div>
+        <div class="icon rpg-coin" aria-hidden="true"></div>
         <h3>$0 to play</h3>
         <p>Every game, no purchase, no subscription, no paywall.</p>
       </div>
       <div class="pledge-item">
-        <div class="icon">🚫</div>
+        <div class="icon rpg-noads" aria-hidden="true"></div>
         <h3>No ads, ever</h3>
         <p>Your attention isn't for sale. Not to us, not to anyone.</p>
       </div>
       <div class="pledge-item">
-        <div class="icon">⚔️</div>
+        <div class="icon rpg-scales" aria-hidden="true"></div>
         <h3>No pay-to-win</h3>
         <p>No microtransactions, no loot boxes, no money-grab skins.</p>
       </div>
       <div class="pledge-item">
-        <div class="icon">📦</div>
+        <div class="icon rpg-chest" aria-hidden="true"></div>
         <h3>You own it</h3>
         <p>Download it, keep it offline, share it. It's yours.</p>
       </div>
@@ -170,17 +175,17 @@
       </div>
       <div class="grid">
         <div class="card">
-          <span class="icon">🫶</span>
+          <span class="icon rpg-potion" aria-hidden="true"></span>
           <h3>Patronage-first</h3>
           <p>Development is funded by ongoing donations and community support, not by selling access to the games themselves.</p>
         </div>
         <div class="card">
-          <span class="icon">🔍</span>
+          <span class="icon rpg-orb" aria-hidden="true"></span>
           <h3>Transparent by default</h3>
           <p>We want supporters to see where their support goes — that's part of the deal we're building.</p>
         </div>
         <div class="card">
-          <span class="icon">🌱</span>
+          <span class="icon rpg-sprout" aria-hidden="true"></span>
           <h3>Small, sustainable, honest</h3>
           <p>We're not chasing hyper-growth. We're testing whether honest games can support themselves.</p>
         </div>
@@ -202,7 +207,7 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="index.html" class="brand"><span class="brand-mark">🥧</span> Pie Time Studio</a>
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span> Pie Time Studio</a>
       <p>Free games. No ads. No pay-to-win. No money-grab skins. Just games you actually own, made possible by the people who play them.</p>
     </div>
     <div class="footer-links">

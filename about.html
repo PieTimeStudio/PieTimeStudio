@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#14100f">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Mission — Pie Time Studio</title>
 <meta name="description" content="Why Pie Time Studio exists: free games, no ads, no pay-to-win, and real ownership — funded entirely by donations.">
+<script>/* page order + slide direction for page transitions */(function(){var o=["index","about","games","support","contact"],d=document.documentElement,n=(location.pathname.split("/").pop()||"index.html").replace(/\.html?$/,""),c=o.indexOf(n),p=null;if(c<0)c=0;try{p=sessionStorage.getItem("ptsPage");sessionStorage.setItem("ptsPage",c)}catch(e){}if(p!==null&&+p!==c)d.classList.add(+p<c?"nav-fwd":"nav-back");if(document.startViewTransition&&/^https?:$/.test(location.protocol))d.classList.add("vt")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +17,7 @@
 <header class="site-header">
   <nav class="nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">🥧</span> Pie Time Studio
+      <span class="brand-mark" aria-hidden="true"></span> Pie Time Studio
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
@@ -113,7 +118,7 @@
     </div>
     <div class="grid grid-2">
       <div class="card">
-        <span class="icon">🎮</span>
+        <span class="icon rpg-d20" aria-hidden="true"></span>
         <h3>Zero-cost games, real ownership</h3>
         <p>
           Every game we release is free to download and free to keep. No
@@ -122,7 +127,7 @@
         </p>
       </div>
       <div class="card">
-        <span class="icon">🚫💳</span>
+        <span class="icon rpg-nopurse" aria-hidden="true"></span>
         <h3>No monetization tricks</h3>
         <p>
           No ads. No pay-to-win mechanics. No cosmetic money grabs disguised
@@ -131,7 +136,7 @@
         </p>
       </div>
       <div class="card">
-        <span class="icon">🫶</span>
+        <span class="icon rpg-potion" aria-hidden="true"></span>
         <h3>Funded by patronage, not players' wallets</h3>
         <p>
           We're betting that a large enough audience will choose to support
@@ -140,7 +145,7 @@
         </p>
       </div>
       <div class="card">
-        <span class="icon">🤝</span>
+        <span class="icon rpg-campfire" aria-hidden="true"></span>
         <h3>Built in the open, with our community</h3>
         <p>
           We want the people who support us to feel like part of the studio,
@@ -165,7 +170,7 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="index.html" class="brand"><span class="brand-mark">🥧</span> Pie Time Studio</a>
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span> Pie Time Studio</a>
       <p>Free games. No ads. No pay-to-win. No money-grab skins. Just games you actually own, made possible by the people who play them.</p>
     </div>
     <div class="footer-links">

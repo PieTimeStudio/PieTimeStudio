@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#14100f">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Pie Time Studio</title>
 <meta name="description" content="Get in touch with Pie Time Studio.">
+<script>/* page order + slide direction for page transitions */(function(){var o=["index","about","games","support","contact"],d=document.documentElement,n=(location.pathname.split("/").pop()||"index.html").replace(/\.html?$/,""),c=o.indexOf(n),p=null;if(c<0)c=0;try{p=sessionStorage.getItem("ptsPage");sessionStorage.setItem("ptsPage",c)}catch(e){}if(p!==null&&+p!==c)d.classList.add(+p<c?"nav-fwd":"nav-back");if(document.startViewTransition&&/^https?:$/.test(location.protocol))d.classList.add("vt")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +17,7 @@
 <header class="site-header">
   <nav class="nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">🥧</span> Pie Time Studio
+      <span class="brand-mark" aria-hidden="true"></span> Pie Time Studio
     </a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
@@ -40,12 +45,12 @@
   <section class="block">
     <div class="grid grid-2">
       <a class="card card-link" href="mailto:pie@pietimestudio.com">
-        <span class="icon">✉️</span>
+        <span class="icon rpg-letter" aria-hidden="true"></span>
         <h3>Email</h3>
         <p>pie@pietimestudio.com</p>
       </a>
       <a class="card card-link" href="https://discord.gg/nf4VJxse9K" target="_blank" rel="noopener">
-        <span class="icon">💬</span>
+        <span class="icon rpg-tankard" aria-hidden="true"></span>
         <h3>Community</h3>
         <p>Join us on Discord →</p>
       </a>
@@ -57,7 +62,7 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="index.html" class="brand"><span class="brand-mark">🥧</span> Pie Time Studio</a>
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span> Pie Time Studio</a>
       <p>Free games. No ads. No pay-to-win. No money-grab skins. Just games you actually own, made possible by the people who play them.</p>
     </div>
     <div class="footer-links">
