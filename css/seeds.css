@@ -418,7 +418,7 @@ body.seed-holding .game-card:hover { border-color: var(--leaf); box-shadow: 0 0 
 .seed-drag-ghost {
   width: 40px;
   height: 50px;
-  filter: drop-shadow(0 10px 10px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(255,177,94,.35));
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(236,201,90,.35));
   animation: ghost-wobble .6s ease-in-out infinite alternate;
 }
 @keyframes ghost-wobble { from { transform: translate(-50%, -50%) rotate(-14deg); } to { transform: translate(-50%, -50%) rotate(6deg); } }
@@ -480,3 +480,6 @@ body.seed-holding .game-card:hover { border-color: var(--leaf); box-shadow: 0 0 
 .seed-bag-heading h2 { color: var(--parchment, #e9d6b3); }
 .seed-bag-icon { border-color: #6b5443; }
 .game-card.most-loved .thumb::after { color: var(--ink); }
+
+/* Round 4: moss on one corner stone of the seed bag bar */
+.seed-bag-bar::after { background-image: var(--brick-tl), var(--brick-tr), var(--brick-bl), var(--brick-br-moss); }
