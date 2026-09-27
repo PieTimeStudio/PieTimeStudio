@@ -1870,3 +1870,45 @@ main { flex: 1 0 auto; }
 }
 .game-card-link:hover .has-cover img,
 .mini-game-card:hover .has-cover img { transform: scale(1.03); }
+
+/* Patreon link on the Support page */
+.patreon-cta { display: flex; justify-content: center; margin-top: 36px; }
+.patreon-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 100%;
+  padding: 18px 28px;
+  background: var(--bg-alt);
+  border: 2px solid var(--accent-dim);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.patreon-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.45), 0 0 18px var(--shadow-glow);
+}
+.patreon-card-icon { font-size: 2rem; line-height: 1; }
+.patreon-card-text { display: flex; flex-direction: column; gap: 4px; text-align: left; min-width: 0; }
+.patreon-card-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+}
+.patreon-card-sub { color: var(--text-dim); font-size: 0.95rem; overflow-wrap: anywhere; }
+.patreon-card-arrow { font-size: 1.4rem; color: var(--accent); transition: transform .2s; }
+.patreon-card:hover .patreon-card-arrow { transform: translateX(4px); }
+@media (max-width: 560px) {
+  .patreon-card { gap: 14px; padding: 16px 18px; }
+  .patreon-card-icon { font-size: 1.6rem; }
+  .patreon-card-title { font-size: 0.95rem; letter-spacing: 0.04em; }
+  .patreon-card-sub { font-size: 0.85rem; }
+  .patreon-card-arrow { display: none; }
+}
